@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Progress } from '@/components/ui/progress';
+
 import { AlertTriangle, Calculator, CheckCircle } from 'lucide-react';
 
 // Import local images
@@ -184,7 +184,7 @@ const HowToUsePage = () => {
 
         {/* Steps */}
         <div className="space-y-16">
-          {steps.map((step, index) => (
+          {steps.map((step, _index) => (
             <Card key={step.number} className="overflow-hidden shadow-xl">
               <CardHeader className="bg-gradient-to-r from-blue-600 to-blue-700 text-white">
                 <div className="flex items-center gap-4">

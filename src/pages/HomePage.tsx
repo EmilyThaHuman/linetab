@@ -1,19 +1,19 @@
-import React from 'react';
+
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { WavyBackground } from '../components/ui/wavy-background';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
-import { Badge } from '../components/ui/badge';
+
 import { Button } from '../components/ui/button';
 import ChatAssistant from '../components/ChatAssistant';
 
 // Import local images
-import LogoSvg from '../assets/images/Logo.svg';
+
 import CleanWaterSvg from '../assets/images/clean_water.svg';
-import ProductImage from '../assets/images/linetab-product-05.png';
+
 import SetupImage from '../assets/images/linetab-setup.webp';
-import BiofilmImage from '../assets/images/biofilm.png';
-import RunThroughLinesImage from '../assets/images/run-through-lines.webp';
+
+
 import DoubleDownArrowSvg from '../assets/images/doubledownarrow.svg';
 import DownloadSvg from '../assets/images/download.svg';
 

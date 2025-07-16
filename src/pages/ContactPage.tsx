@@ -9,7 +9,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { Mail, Phone, MapPin, Clock, MessageSquare, HelpCircle, CheckCircle } from 'lucide-react';
 
 // Import local images
-import OfficeImage from '../assets/images/office.webp';
+
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({

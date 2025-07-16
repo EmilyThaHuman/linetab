@@ -4,10 +4,10 @@ import ReactMarkdown from 'react-markdown';
 import OpenAI from 'openai';
 import { X, MessageCircle, Send } from 'lucide-react';
 
-const openai = new OpenAI({
+const openai = import.meta.env.VITE_OPENAI_API_KEY ? new OpenAI({
   apiKey: import.meta.env.VITE_OPENAI_API_KEY,
   dangerouslyAllowBrowser: true
-});
+}) : null;
 
 interface Message {
   role: 'user' | 'assistant';
@@ -97,6 +97,16 @@ export default function ChatAssistant() {
     setMessages(prev => [...prev, streamingMessage]);
 
     try {
+      if (!openai) {
+        // Fallback message when API key is not available
+        setMessages(prev => prev.slice(0, -1).concat([{
+          role: 'assistant',
+          content: 'I apologize, but the chat service is currently unavailable. Please contact us directly at info@linetab.com or call us for assistance with your LineTab products.',
+          isStreaming: false
+        }]));
+        return;
+      }
+
       const response = await openai.chat.completions.create({
         model: 'gpt-4',
         messages: [
