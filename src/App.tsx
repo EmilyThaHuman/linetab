@@ -10,7 +10,7 @@ import ContactPage from './pages/ContactPage';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/linetab">
       <div className="min-h-screen bg-white">
         <Header />
         

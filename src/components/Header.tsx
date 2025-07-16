@@ -8,7 +8,6 @@ import {
   MobileNavHeader,
   MobileNavMenu,
   MobileNavToggle,
-  NavbarButton,
 } from './ui/resizable-navbar';
 import LineTabLogo from '../assets/linetab-logo.svg';
 
@@ -52,14 +51,12 @@ const Header = () => {
         />
         
         <div className="flex items-center space-x-2">
-          <NavbarButton 
-            as={Link}
-            href="/product"
-            variant="dark"
-            className="bg-blue-600 text-white hover:bg-blue-700"
+          <Link
+            to="/product"
+            className="px-4 py-2 rounded-md bg-blue-600 text-white text-sm font-bold relative cursor-pointer hover:bg-blue-700 hover:-translate-y-0.5 transition duration-200 inline-block text-center shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
           >
             Buy Now
-          </NavbarButton>
+          </Link>
         </div>
       </NavBody>
 
@@ -101,14 +98,12 @@ const Header = () => {
             </Link>
           ))}
           <div className="flex flex-col space-y-2 pt-4">
-            <NavbarButton 
-              as={Link}
-              href="/product"
-              variant="dark"
-              className="bg-blue-600 text-white hover:bg-blue-700"
+            <Link
+              to="/product"
+              className="px-4 py-2 rounded-md bg-blue-600 text-white text-sm font-bold relative cursor-pointer hover:bg-blue-700 hover:-translate-y-0.5 transition duration-200 inline-block text-center shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
             >
               Buy Now
-            </NavbarButton>
+            </Link>
           </div>
         </MobileNavMenu>
       </MobileNav>
