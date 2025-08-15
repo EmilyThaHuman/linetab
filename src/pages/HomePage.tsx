@@ -1,11 +1,12 @@
 
 import { Link } from 'react-router-dom';
-import { motion } from 'motion/react';
-import { WavyBackground } from '../components/ui/wavy-background';
+import { motion, AnimatePresence } from 'motion/react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
+import { useState } from 'react';
 
 import { Button } from '../components/ui/button';
 import ChatAssistant from '../components/ChatAssistant';
+import BubbleAnimation from '../components/BubbleAnimation';
 
 // Import local images
 
@@ -13,17 +14,11 @@ import CleanWaterSvg from '../assets/images/clean_water.svg';
 
 import SetupImage from '../assets/images/linetab-setup.webp';
 
-
-import DoubleDownArrowSvg from '../assets/images/doubledownarrow.svg';
+import LogoSvg from '../assets/images/Logo.svg';
 import DownloadSvg from '../assets/images/download.svg';
 
 const HomePage = () => {
-  const scrollToFeatures = () => {
-    const featuresSection = document.getElementById('features');
-    if (featuresSection) {
-      featuresSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const [showBubbleAnimation, setShowBubbleAnimation] = useState(true);
 
   // Animation variants
   const fadeInUp = {
@@ -53,87 +48,109 @@ const HomePage = () => {
   };
 
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-blue-50 to-white">
-        <WavyBackground className="max-w-4xl mx-auto pb-40" colors={["#3b82f6", "#2563eb", "#1d4ed8", "#1e40af"]}>
-          <motion.div 
-            className="text-center space-y-8 px-4"
-            initial="initial"
-            animate="animate"
-            variants={staggerContainer}
-          >
-            <motion.h1 
-              className="text-5xl md:text-7xl font-bold text-white mb-6"
-              variants={fadeInUp}
+    <>
+      {/* Show bubble animation first */}
+      <AnimatePresence>
+        {showBubbleAnimation && (
+          <div className="fixed inset-0 z-50">
+            <BubbleAnimation onComplete={() => setShowBubbleAnimation(false)} />
+            {/* Add a button to skip to main content */}
+            <button 
+              onClick={() => setShowBubbleAnimation(false)}
+              className="absolute bottom-8 right-8 px-6 py-3 bg-white bg-opacity-20 hover:bg-opacity-30 text-white font-semibold rounded-lg shadow-lg transition-all duration-200 backdrop-blur-sm border border-white border-opacity-30"
             >
-              LineTab
-            </motion.h1>
-            
-            <motion.p 
-              className="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto"
-              variants={fadeInUp}
-            >
-              Revolutionary dental waterline treatment tablets that maintain clean, safe water in your dental unit for weeks
-            </motion.p>
-            
-            <motion.div 
-              className="flex flex-col md:flex-row gap-4 justify-center items-center"
-              variants={fadeInUp}
-            >
-              <Link to="/product">
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Button 
-                    size="lg" 
-                    className="bg-white text-blue-600 hover:bg-blue-50 transition-all duration-200 font-semibold px-8 py-4 text-lg"
-                  >
-                    Buy Now
-                  </Button>
-                </motion.div>
-              </Link>
-              <Link to="/how-to-use">
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Button 
-                    variant="outline" 
-                    size="lg"
-                    className="border-white text-white hover:bg-white/10 hover:text-white px-8 py-4 text-lg bg-transparent"
-                  >
-                    Learn How It Works
-                  </Button>
-                </motion.div>
-              </Link>
-            </motion.div>
-          </motion.div>
-        </WavyBackground>
-        
-        {/* Scroll Down Animation - positioned higher to account for header padding */}
-        <motion.div 
-          className="absolute bottom-24 left-1/2 transform -translate-x-1/2 flex flex-col items-center cursor-pointer" 
-          onClick={scrollToFeatures}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1, duration: 0.6 }}
-        >
-          <p className="text-white/80 text-sm mb-2 font-medium">Scroll to learn more</p>
-          <motion.div 
-            className="animate-bounce"
-            whileHover={{ scale: 1.1 }}
-          >
-            <img 
-              src={DoubleDownArrowSvg} 
-              alt="Scroll down" 
-              className="h-6 w-6 filter invert"
-            />
-          </motion.div>
-        </motion.div>
-      </section>
+              Skip to Main Content →
+            </button>
+          </div>
+        )}
+      </AnimatePresence>
 
+      {/* Main homepage content */}
+      <AnimatePresence>
+        {!showBubbleAnimation && (
+          <motion.div 
+            className="min-h-screen"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+          >
+            {/* Hero Section */}
+            <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 w-full">
+          <div className="max-w-5xl mx-auto flex flex-col-reverse md:flex-row xl:items-center h-full">
+            <div className="w-full lg:w-1/2 relative z-10 lg:pr-10 flex flex-col justify-center">
+              <motion.div 
+                className="flex justify-center md:justify-start mb-1"
+                variants={fadeInUp}
+                initial="initial"
+                animate="animate"
+              >
+                <img 
+                  src={LogoSvg} 
+                  alt="LineTab Logo" 
+                  className="h-16 md:h-20 w-auto"
+                />
+              </motion.div>
+              
+              <motion.h1 
+                className="text-4xl md:text-5xl lg:text-6xl font-semibold md:font-black tracking-tight text-gray-900"
+                variants={fadeInUp}
+                initial="initial"
+                animate="animate"
+                transition={{ delay: 0.2 }}
+              >
+                Everything you need for safe waterlines.
+              </motion.h1>
+              
+              <motion.p 
+                className="text-xl md:text-2xl mb-2 max-w-3xl mx-auto md:mx-0 font-semibold tracking-wide mt-1"
+                style={{ color: '#1C3960' }}
+                variants={fadeInUp}
+                initial="initial"
+                animate="animate"
+                transition={{ delay: 0.4 }}
+              >
+                DENTAL WATERLINE MAINTENANCE TABLETS
+              </motion.p>
+              
+              <motion.div 
+                className="flex flex-col md:flex-row gap-4 justify-center md:justify-start items-center mt-2"
+                variants={fadeInUp}
+                initial="initial"
+                animate="animate"
+                transition={{ delay: 0.6 }}
+              >
+                <Link to="/product">
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Button 
+                      size="lg" 
+                      className="bg-blue-600 text-white hover:bg-blue-700 transition-all duration-200 font-semibold px-8 py-4 text-lg"
+                    >
+                      Get started
+                    </Button>
+                  </motion.div>
+                </Link>
+              </motion.div>
+            </div>
+            
+            <div className="relative w-full aspect-4/3 lg:w-1/2 rounded-3xl overflow-hidden flex items-center justify-center">
+              <motion.img 
+                src={SetupImage} 
+                alt="LineTab Setup Process" 
+                className="w-full h-full object-cover rounded-3xl"
+                initial={{ opacity: 0, scale: 1.1 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8 }}
+                whileHover={{ scale: 1.02 }}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+        
       {/* Features Section */}
       <section id="features" className="py-20 bg-gradient-to-b from-white to-blue-50">
         <div className="container mx-auto px-4">
@@ -532,9 +549,12 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Chat Assistant */}
-      <ChatAssistant />
-    </div>
+            {/* Chat Assistant */}
+            <ChatAssistant />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 
