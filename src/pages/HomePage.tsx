@@ -1,12 +1,10 @@
 
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
-import { useState } from 'react';
 
 import { Button } from '../components/ui/button';
 import ChatAssistant from '../components/ChatAssistant';
-import BubbleAnimation from '../components/BubbleAnimation';
 
 // Import local images
 
@@ -18,7 +16,6 @@ import LogoSvg from '../assets/images/Logo.svg';
 import DownloadSvg from '../assets/images/download.svg';
 
 const HomePage = () => {
-  const [showBubbleAnimation, setShowBubbleAnimation] = useState(true);
 
   // Animation variants
   const fadeInUp = {
@@ -48,27 +45,7 @@ const HomePage = () => {
   };
 
   return (
-    <>
-      {/* Show bubble animation first */}
-      <AnimatePresence>
-        {showBubbleAnimation && (
-          <div className="fixed inset-0 z-50">
-            <BubbleAnimation onComplete={() => setShowBubbleAnimation(false)} />
-            {/* Add a button to skip to main content */}
-            <button 
-              onClick={() => setShowBubbleAnimation(false)}
-              className="absolute bottom-8 right-8 px-6 py-3 bg-white bg-opacity-20 hover:bg-opacity-30 text-white font-semibold rounded-lg shadow-lg transition-all duration-200 backdrop-blur-sm border border-white border-opacity-30"
-            >
-              Skip to Main Content →
-            </button>
-          </div>
-        )}
-      </AnimatePresence>
-
-      {/* Main homepage content */}
-      <AnimatePresence>
-        {!showBubbleAnimation && (
-          <motion.div 
+    <motion.div 
             className="min-h-screen"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -549,12 +526,242 @@ const HomePage = () => {
         </div>
       </section>
 
-            {/* Chat Assistant */}
-            <ChatAssistant />
+      {/* Blog Section */}
+      <section className="py-20 bg-gradient-to-b from-white to-blue-50">
+        <div className="max-w-7xl mx-auto px-4">
+          <motion.div 
+            className="text-center mb-10"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Latest Insights
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Expert tips, best practices, and the latest updates on dental waterline maintenance
+            </p>
           </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+            style={{
+              gap: '2.5rem 1rem'
+            }}
+            initial="initial"
+            whileInView="animate"
+            variants={staggerContainer}
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            {/* Blog Post 1 */}
+            <motion.div variants={fadeInUp}>
+              <article className="flex flex-col">
+                <div className="relative bg-gray-100 mb-4" style={{ aspectRatio: '600/300' }}>
+                  <Link to="/blog/waterline-maintenance-best-practices">
+                    <motion.img 
+                      src="/images/flush-waterlines.webp" 
+                      alt="Waterline Maintenance Best Practices" 
+                      className="absolute inset-0 w-full h-full object-cover"
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  </Link>
+                </div>
+                <div className="flex flex-col">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2 leading-tight">
+                    5 Essential Waterline Maintenance Best Practices
+                  </h3>
+                  <p className="text-gray-700 mb-3 leading-relaxed">
+                    Discover the most effective strategies for maintaining clean dental waterlines and ensuring patient safety with proper biofilm prevention techniques.
+                  </p>
+                  <Link 
+                    to="/blog/waterline-maintenance-best-practices"
+                    className="text-gray-900 hover:text-gray-700 font-medium text-sm underline underline-offset-4 hover:decoration-2"
+                  >
+                    Read More
+                  </Link>
+                </div>
+              </article>
+            </motion.div>
+
+            {/* Blog Post 2 */}
+            <motion.div variants={fadeInUp}>
+              <article className="flex flex-col">
+                <div className="relative bg-gray-100 mb-4" style={{ aspectRatio: '600/300' }}>
+                  <Link to="/blog/understanding-biofilm-formation">
+                    <motion.img 
+                      src="/src/assets/images/biofilm.webp" 
+                      alt="Understanding Biofilm Formation" 
+                      className="absolute inset-0 w-full h-full object-cover"
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  </Link>
+                </div>
+                <div className="flex flex-col">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2 leading-tight">
+                    Understanding Biofilm: The Hidden Threat in Waterlines
+                  </h3>
+                  <p className="text-gray-700 mb-3 leading-relaxed">
+                    Learn about biofilm formation in dental waterlines and why EPA-approved treatments like LineTab are essential for patient safety.
+                  </p>
+                  <Link 
+                    to="/blog/understanding-biofilm-formation"
+                    className="text-gray-900 hover:text-gray-700 font-medium text-sm underline underline-offset-4 hover:decoration-2"
+                  >
+                    Read More
+                  </Link>
+                </div>
+              </article>
+            </motion.div>
+
+            {/* Blog Post 3 */}
+            <motion.div variants={fadeInUp}>
+              <article className="flex flex-col">
+                <div className="relative bg-gray-100 mb-4" style={{ aspectRatio: '600/300' }}>
+                  <Link to="/blog/linetab-setup-installation-guide">
+                    <motion.img 
+                      src="/src/assets/images/prepare-solution.webp" 
+                      alt="LineTab Setup Guide" 
+                      className="absolute inset-0 w-full h-full object-cover"
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  </Link>
+                </div>
+                <div className="flex flex-col">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2 leading-tight">
+                    Complete LineTab Setup and Installation Guide
+                  </h3>
+                  <p className="text-gray-700 mb-3 leading-relaxed">
+                    Step-by-step instructions for setting up LineTab in your dental practice, ensuring optimal waterline protection from day one.
+                  </p>
+                  <Link 
+                    to="/blog/linetab-setup-installation-guide"
+                    className="text-gray-900 hover:text-gray-700 font-medium text-sm underline underline-offset-4 hover:decoration-2"
+                  >
+                    Read More
+                  </Link>
+                </div>
+              </article>
+            </motion.div>
+
+            {/* Blog Post 4 */}
+            <motion.div variants={fadeInUp}>
+              <article className="flex flex-col">
+                <div className="relative bg-gray-100 mb-4" style={{ aspectRatio: '600/300' }}>
+                  <Link to="/blog/epa-regulations-dental-compliance">
+                    <motion.img 
+                      src="/src/assets/images/office.webp" 
+                      alt="Regulatory Compliance" 
+                      className="absolute inset-0 w-full h-full object-cover"
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  </Link>
+                </div>
+                <div className="flex flex-col">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2 leading-tight">
+                    EPA Regulations and Dental Practice Compliance
+                  </h3>
+                  <p className="text-gray-700 mb-3 leading-relaxed">
+                    Stay compliant with EPA regulations and industry standards with our comprehensive guide to waterline treatment requirements.
+                  </p>
+                  <Link 
+                    to="/blog/epa-regulations-dental-compliance"
+                    className="text-gray-900 hover:text-gray-700 font-medium text-sm underline underline-offset-4 hover:decoration-2"
+                  >
+                    Read More
+                  </Link>
+                </div>
+              </article>
+            </motion.div>
+
+            {/* Blog Post 5 */}
+            <motion.div variants={fadeInUp}>
+              <article className="flex flex-col">
+                <div className="relative bg-gray-100 mb-4" style={{ aspectRatio: '600/300' }}>
+                  <Link to="/blog/cost-benefit-analysis-linetab">
+                    <motion.img 
+                      src="/src/assets/images/run-through-lines.webp" 
+                      alt="Cost Analysis" 
+                      className="absolute inset-0 w-full h-full object-cover"
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  </Link>
+                </div>
+                <div className="flex flex-col">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2 leading-tight">
+                    Cost-Benefit Analysis: LineTab vs Traditional Methods
+                  </h3>
+                  <p className="text-gray-700 mb-3 leading-relaxed">
+                    Compare the costs and benefits of LineTab tablets versus traditional waterline maintenance methods and discover the savings.
+                  </p>
+                  <Link 
+                    to="/blog/cost-benefit-analysis-linetab"
+                    className="text-gray-900 hover:text-gray-700 font-medium text-sm underline underline-offset-4 hover:decoration-2"
+                  >
+                    Read More
+                  </Link>
+                </div>
+              </article>
+            </motion.div>
+
+            {/* Blog Post 6 */}
+            <motion.div variants={fadeInUp}>
+              <article className="flex flex-col">
+                <div className="relative bg-gray-100 mb-4" style={{ aspectRatio: '600/300' }}>
+                  <Link to="/blog/troubleshooting-waterline-issues">
+                    <motion.img 
+                      src="/src/assets/images/adding-tablet.webp" 
+                      alt="Troubleshooting Guide" 
+                      className="absolute inset-0 w-full h-full object-cover"
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  </Link>
+                </div>
+                <div className="flex flex-col">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2 leading-tight">
+                    Troubleshooting Common Waterline Issues
+                  </h3>
+                  <p className="text-gray-700 mb-3 leading-relaxed">
+                    Expert solutions to common waterline problems and how LineTab can help prevent and resolve maintenance challenges.
+                  </p>
+                  <Link 
+                    to="/blog/troubleshooting-waterline-issues"
+                    className="text-gray-900 hover:text-gray-700 font-medium text-sm underline underline-offset-4 hover:decoration-2"
+                  >
+                    Read More
+                  </Link>
+                </div>
+              </article>
+            </motion.div>
+          </motion.div>
+
+          {/* View All Blog Posts Button */}
+          <motion.div 
+            className="text-center mt-10"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            <Link 
+              to="/blog"
+              className="text-gray-900 hover:text-gray-700 font-medium text-sm underline underline-offset-4 hover:decoration-2"
+            >
+              View All Articles
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Chat Assistant */}
+      <ChatAssistant />
+    </motion.div>
   );
 };
 
