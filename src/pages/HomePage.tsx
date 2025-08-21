@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../co
 
 import { Button } from '../components/ui/button';
 import ChatAssistant from '../components/ChatAssistant';
+import Marquee from '../components/ui/marquee';
 
 // Import local images
 
@@ -16,6 +17,51 @@ import LogoSvg from '../assets/images/Logo.svg';
 import DownloadSvg from '../assets/images/download.svg';
 
 const HomePage = () => {
+  // Testimonial data
+  const testimonials = [
+    {
+      name: "Dr. Sarah Chen",
+      role: "Pediatric Dentist",
+      practice: "Bright Smiles Pediatric Dentistry",
+      content: "LineTab revolutionized our waterline maintenance. 5-7 day protection means we focus on patients, not daily water concerns.",
+      avatar: "SC"
+    },
+    {
+      name: "Dr. Michael Rodriguez",
+      role: "General Dentist", 
+      practice: "Rodriguez Family Dental",
+      content: "Since switching to LineTab, our water quality testing has been consistently excellent. The only EPA-approved tablet that delivers.",
+      avatar: "MR"
+    },
+    {
+      name: "Dr. Emily Thompson",
+      role: "Oral Surgeon",
+      practice: "Thompson Oral Surgery Center",
+      content: "The convenience is unmatched. One tablet per week versus daily maintenance - saved us countless hours with perfect compliance.",
+      avatar: "ET"
+    },
+    {
+      name: "Dr. James Park",
+      role: "Endodontist",
+      practice: "Park Root Canal Specialists",
+      content: "LineTab's long-lasting protection gives us peace of mind during complex procedures. Clean and safe waterlines for every patient.",
+      avatar: "JP"
+    },
+    {
+      name: "Dr. Lisa Anderson",
+      role: "Periodontist",
+      practice: "Anderson Periodontal Care",
+      content: "After trying multiple waterline treatments, LineTab is the only one that maintains water quality without daily intervention.",
+      avatar: "LA"
+    },
+    {
+      name: "Dr. David Kim",
+      role: "Prosthodontist",
+      practice: "Kim Prosthetic Dentistry",
+      content: "EPA approval was crucial for our practice. LineTab meets all regulatory requirements and exceeds our water quality expectations.",
+      avatar: "DK"
+    }
+  ];
 
   // Animation variants
   const fadeInUp = {
@@ -69,7 +115,7 @@ const HomePage = () => {
                 />
               </motion.div>
               
-              <motion.h1 
+              {/* <motion.h1 
                 className="text-4xl md:text-5xl lg:text-6xl font-semibold md:font-black tracking-tight text-gray-900"
                 variants={fadeInUp}
                 initial="initial"
@@ -77,7 +123,7 @@ const HomePage = () => {
                 transition={{ delay: 0.2 }}
               >
                 Everything you need for safe waterlines.
-              </motion.h1>
+              </motion.h1> */}
               
               <motion.p 
                 className="text-xl md:text-2xl mb-2 max-w-3xl mx-auto md:mx-0 font-semibold tracking-wide mt-1"
@@ -346,14 +392,14 @@ const HomePage = () => {
               viewport={{ once: true, margin: "-100px" }}
               whileHover={{ y: -5, transition: { duration: 0.2 } }}
             >
-              <Card className="text-center border-2 border-blue-200 shadow-xl bg-white">
+              <Card className="text-center border-2 border-blue-200 shadow-xl bg-white rounded-lg overflow-hidden">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2, duration: 0.6 }}
                   viewport={{ once: true }}
                 >
-                  <CardHeader className="bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-t-lg">
+                  <CardHeader className="bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-t-lg rounded-b-lg">
                     <CardTitle className="text-2xl">LineTab Tablets</CardTitle>
                     <CardDescription className="text-blue-100">
                       100 tablets per bottle
@@ -417,6 +463,90 @@ const HomePage = () => {
               </Card>
             </motion.div>
           </div>
+
+          <motion.div 
+            className="text-center mt-12"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            <p className="text-gray-600 mb-6">
+              Join thousands of dental practices that trust LineTab for their waterline maintenance
+            </p>
+            <Link to="/product">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-lg font-semibold">
+                  Start Your Free Trial
+                </Button>
+              </motion.div>
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Trusted by Dental Professionals
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              See what dentists across the country are saying about LineTab's revolutionary waterline protection
+            </p>
+          </motion.div>
+        </div>
+
+        <div className="relative overflow-hidden w-full">
+          <Marquee pauseOnHover className="[--duration:60s]">
+            {testimonials.map((testimonial, index) => (
+              <motion.div
+                key={index}
+                className="mx-4"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <Card className="w-80 h-64 border-0 shadow-lg hover:shadow-xl transition-shadow bg-white">
+                  <CardContent className="p-6 h-full flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center mb-4">
+                        <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-semibold mr-4">
+                          {testimonial.avatar}
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
+                          <p className="text-sm text-gray-600">{testimonial.role}</p>
+                          <p className="text-xs text-gray-500">{testimonial.practice}</p>
+                        </div>
+                      </div>
+                      <blockquote className="text-gray-700 text-sm leading-relaxed">
+                        "{testimonial.content}"
+                      </blockquote>
+                    </div>
+                    <div className="flex text-yellow-400 mt-4">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                          <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                        </svg>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </Marquee>
         </div>
       </section>
 
@@ -526,238 +656,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Blog Section */}
-      <section className="py-20 bg-gradient-to-b from-white to-blue-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <motion.div 
-            className="text-center mb-10"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true, margin: "-100px" }}
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Latest Insights
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Expert tips, best practices, and the latest updates on dental waterline maintenance
-            </p>
-          </motion.div>
-
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-            style={{
-              gap: '2.5rem 1rem'
-            }}
-            initial="initial"
-            whileInView="animate"
-            variants={staggerContainer}
-            viewport={{ once: true, margin: "-100px" }}
-          >
-            {/* Blog Post 1 */}
-            <motion.div variants={fadeInUp}>
-              <article className="flex flex-col">
-                <div className="relative bg-gray-100 mb-4" style={{ aspectRatio: '600/300' }}>
-                  <Link to="/blog/waterline-maintenance-best-practices">
-                    <motion.img 
-                      src="/images/flush-waterlines.webp" 
-                      alt="Waterline Maintenance Best Practices" 
-                      className="absolute inset-0 w-full h-full object-cover"
-                      whileHover={{ scale: 1.02 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  </Link>
-                </div>
-                <div className="flex flex-col">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2 leading-tight">
-                    5 Essential Waterline Maintenance Best Practices
-                  </h3>
-                  <p className="text-gray-700 mb-3 leading-relaxed">
-                    Discover the most effective strategies for maintaining clean dental waterlines and ensuring patient safety with proper biofilm prevention techniques.
-                  </p>
-                  <Link 
-                    to="/blog/waterline-maintenance-best-practices"
-                    className="text-gray-900 hover:text-gray-700 font-medium text-sm underline underline-offset-4 hover:decoration-2"
-                  >
-                    Read More
-                  </Link>
-                </div>
-              </article>
-            </motion.div>
-
-            {/* Blog Post 2 */}
-            <motion.div variants={fadeInUp}>
-              <article className="flex flex-col">
-                <div className="relative bg-gray-100 mb-4" style={{ aspectRatio: '600/300' }}>
-                  <Link to="/blog/understanding-biofilm-formation">
-                    <motion.img 
-                      src="/src/assets/images/biofilm.webp" 
-                      alt="Understanding Biofilm Formation" 
-                      className="absolute inset-0 w-full h-full object-cover"
-                      whileHover={{ scale: 1.02 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  </Link>
-                </div>
-                <div className="flex flex-col">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2 leading-tight">
-                    Understanding Biofilm: The Hidden Threat in Waterlines
-                  </h3>
-                  <p className="text-gray-700 mb-3 leading-relaxed">
-                    Learn about biofilm formation in dental waterlines and why EPA-approved treatments like LineTab are essential for patient safety.
-                  </p>
-                  <Link 
-                    to="/blog/understanding-biofilm-formation"
-                    className="text-gray-900 hover:text-gray-700 font-medium text-sm underline underline-offset-4 hover:decoration-2"
-                  >
-                    Read More
-                  </Link>
-                </div>
-              </article>
-            </motion.div>
-
-            {/* Blog Post 3 */}
-            <motion.div variants={fadeInUp}>
-              <article className="flex flex-col">
-                <div className="relative bg-gray-100 mb-4" style={{ aspectRatio: '600/300' }}>
-                  <Link to="/blog/linetab-setup-installation-guide">
-                    <motion.img 
-                      src="/src/assets/images/prepare-solution.webp" 
-                      alt="LineTab Setup Guide" 
-                      className="absolute inset-0 w-full h-full object-cover"
-                      whileHover={{ scale: 1.02 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  </Link>
-                </div>
-                <div className="flex flex-col">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2 leading-tight">
-                    Complete LineTab Setup and Installation Guide
-                  </h3>
-                  <p className="text-gray-700 mb-3 leading-relaxed">
-                    Step-by-step instructions for setting up LineTab in your dental practice, ensuring optimal waterline protection from day one.
-                  </p>
-                  <Link 
-                    to="/blog/linetab-setup-installation-guide"
-                    className="text-gray-900 hover:text-gray-700 font-medium text-sm underline underline-offset-4 hover:decoration-2"
-                  >
-                    Read More
-                  </Link>
-                </div>
-              </article>
-            </motion.div>
-
-            {/* Blog Post 4 */}
-            <motion.div variants={fadeInUp}>
-              <article className="flex flex-col">
-                <div className="relative bg-gray-100 mb-4" style={{ aspectRatio: '600/300' }}>
-                  <Link to="/blog/epa-regulations-dental-compliance">
-                    <motion.img 
-                      src="/src/assets/images/office.webp" 
-                      alt="Regulatory Compliance" 
-                      className="absolute inset-0 w-full h-full object-cover"
-                      whileHover={{ scale: 1.02 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  </Link>
-                </div>
-                <div className="flex flex-col">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2 leading-tight">
-                    EPA Regulations and Dental Practice Compliance
-                  </h3>
-                  <p className="text-gray-700 mb-3 leading-relaxed">
-                    Stay compliant with EPA regulations and industry standards with our comprehensive guide to waterline treatment requirements.
-                  </p>
-                  <Link 
-                    to="/blog/epa-regulations-dental-compliance"
-                    className="text-gray-900 hover:text-gray-700 font-medium text-sm underline underline-offset-4 hover:decoration-2"
-                  >
-                    Read More
-                  </Link>
-                </div>
-              </article>
-            </motion.div>
-
-            {/* Blog Post 5 */}
-            <motion.div variants={fadeInUp}>
-              <article className="flex flex-col">
-                <div className="relative bg-gray-100 mb-4" style={{ aspectRatio: '600/300' }}>
-                  <Link to="/blog/cost-benefit-analysis-linetab">
-                    <motion.img 
-                      src="/src/assets/images/run-through-lines.webp" 
-                      alt="Cost Analysis" 
-                      className="absolute inset-0 w-full h-full object-cover"
-                      whileHover={{ scale: 1.02 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  </Link>
-                </div>
-                <div className="flex flex-col">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2 leading-tight">
-                    Cost-Benefit Analysis: LineTab vs Traditional Methods
-                  </h3>
-                  <p className="text-gray-700 mb-3 leading-relaxed">
-                    Compare the costs and benefits of LineTab tablets versus traditional waterline maintenance methods and discover the savings.
-                  </p>
-                  <Link 
-                    to="/blog/cost-benefit-analysis-linetab"
-                    className="text-gray-900 hover:text-gray-700 font-medium text-sm underline underline-offset-4 hover:decoration-2"
-                  >
-                    Read More
-                  </Link>
-                </div>
-              </article>
-            </motion.div>
-
-            {/* Blog Post 6 */}
-            <motion.div variants={fadeInUp}>
-              <article className="flex flex-col">
-                <div className="relative bg-gray-100 mb-4" style={{ aspectRatio: '600/300' }}>
-                  <Link to="/blog/troubleshooting-waterline-issues">
-                    <motion.img 
-                      src="/src/assets/images/adding-tablet.webp" 
-                      alt="Troubleshooting Guide" 
-                      className="absolute inset-0 w-full h-full object-cover"
-                      whileHover={{ scale: 1.02 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  </Link>
-                </div>
-                <div className="flex flex-col">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2 leading-tight">
-                    Troubleshooting Common Waterline Issues
-                  </h3>
-                  <p className="text-gray-700 mb-3 leading-relaxed">
-                    Expert solutions to common waterline problems and how LineTab can help prevent and resolve maintenance challenges.
-                  </p>
-                  <Link 
-                    to="/blog/troubleshooting-waterline-issues"
-                    className="text-gray-900 hover:text-gray-700 font-medium text-sm underline underline-offset-4 hover:decoration-2"
-                  >
-                    Read More
-                  </Link>
-                </div>
-              </article>
-            </motion.div>
-          </motion.div>
-
-          {/* View All Blog Posts Button */}
-          <motion.div 
-            className="text-center mt-10"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true, margin: "-100px" }}
-          >
-            <Link 
-              to="/blog"
-              className="text-gray-900 hover:text-gray-700 font-medium text-sm underline underline-offset-4 hover:decoration-2"
-            >
-              View All Articles
-            </Link>
-          </motion.div>
-        </div>
-      </section>
+      {/* Blog Section moved to About page */}
 
       {/* Chat Assistant */}
       <ChatAssistant />

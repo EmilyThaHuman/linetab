@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="favicon" xmlns="http://www.w3.org/2000/svg" viewBox="90 55 45 65">
+  <defs>
+    <style>.cls-4{fill:#0094d2;}</style>
+  </defs>
+  <g>
+    <polygon class="cls-4" points="132.7 111.95 128.26 106.81 128.26 117.1 132.7 111.95"/>
+    <path class="cls-4" d="M128.29,106.81v10.31h-16.5c-10.65,0-19.29-8.64-19.29-19.29V60.27h11.59v34.11c0,6.86,5.57,12.43,12.43,12.43h11.77Z"/>
+    <path class="cls-4" d="M121.01,101.63h-2.69c-4.92,0-8.91-3.99-8.91-8.91V60.12h11.59v41.5Z"/>
+    <rect class="cls-4" x="111.54" y="68.1" width="16.71" height="11.59"/>
+    <rect class="cls-4" x="118.19" y="90.06" width="10.06" height="11.59"/>
+  </g>
+</svg>

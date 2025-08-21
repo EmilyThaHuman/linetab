@@ -9,7 +9,8 @@ import {
   MobileNavMenu,
   MobileNavToggle,
 } from './ui/resizable-navbar';
-import LineTabLogo from '../assets/linetab-logo.svg';
+import LineTabLogo from '../assets/images/LineTab-logo.svg';
+import Logo from '../assets/images/Logo.svg';
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -18,6 +19,7 @@ const Header = () => {
     { name: 'Product', link: '/product' },
     { name: 'How to Use', link: '/how-to-use' },
     { name: 'Biofilm Dangers', link: '/biofilm-dangers' },
+    { name: 'About', link: '/about' },
     { name: 'Contact', link: '/contact' },
   ];
 
@@ -36,11 +38,15 @@ const Header = () => {
           <img
             src={LineTabLogo}
             alt="LineTab"
-            width={40}
-            height={40}
-            className="h-8 w-8"
+            width={32}
+            height={46}
+            className="h-8 w-auto"
           />
-          <span className="font-bold text-lg text-blue-900 dark:text-white">LineTab</span>
+          <img
+            src={Logo}
+            alt="LineTab"
+            className="h-5"
+          />
         </Link>
         
         <NavItems 
@@ -70,11 +76,15 @@ const Header = () => {
             <img
               src={LineTabLogo}
               alt="LineTab"
-              width={32}
-              height={32}
-              className="h-6 w-6"
+              width={28}
+              height={40}
+              className="h-7 w-auto"
             />
-            <span className="font-bold text-blue-900 dark:text-white">LineTab</span>
+            <img
+              src={Logo}
+              alt="LineTab"
+              className="h-4"
+            />
           </Link>
           
           <MobileNavToggle 

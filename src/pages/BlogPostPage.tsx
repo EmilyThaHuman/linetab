@@ -45,6 +45,7 @@ const blogPosts: Record<string, {
       },
       {
         type: 'image',
+        content: '',
         image: '/images/run-through-lines.webp',
         alt: 'Daily waterline flushing procedure'
       },
@@ -176,6 +177,7 @@ const blogPosts: Record<string, {
       },
       {
         type: 'image',
+        content: '',
         image: '/images/flush-waterlines.webp',
         alt: 'Flushing waterlines before LineTab installation'
       },
@@ -193,6 +195,7 @@ const blogPosts: Record<string, {
       },
       {
         type: 'image',
+        content: '',
         image: '/images/adding-tablet.webp',
         alt: 'Adding LineTab tablet to water reservoir'
       },
@@ -503,13 +506,13 @@ const BlogPostPage: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.5 }}
         >
           <Link 
-            to="/"
+            to="/about"
             className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
           >
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 6l-6 6 6 6" />
             </svg>
-            Back to blog
+            Back to insights
           </Link>
         </motion.div>
       </article>

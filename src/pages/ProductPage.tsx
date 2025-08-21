@@ -8,6 +8,7 @@ import { CheckCircle, Truck, Shield, Star, Clock } from 'lucide-react';
 
 // Import local images
 import ProductImage from '../assets/images/linetab-product-05.png';
+import LogoSvg from '../assets/images/Logo.svg';
 
 const ProductPage = () => {
   const [quantity, setQuantity] = useState(1);
@@ -25,13 +26,13 @@ const ProductPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       {/* Hero Section */}
-      <div className="container mx-auto px-4 py-12">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <div className="container mx-auto px-8 py-8">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-6 items-center">
             
             {/* Product Image */}
             <motion.div 
-              className="flex justify-center"
+              className="flex justify-center lg:justify-start"
               initial={{ opacity: 0, x: -40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
@@ -40,51 +41,50 @@ const ProductPage = () => {
                 <motion.img 
                   src={ProductImage}
                   alt="LineTab Waterline Maintenance Tablets" 
-                  className="w-full max-w-lg drop-shadow-2xl"
+                  className="w-full max-w-xs drop-shadow-xl"
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.3 }}
                 />
-                <div className="absolute -top-4 -right-4">
-                  <Badge className="bg-green-500 text-white px-3 py-1 text-sm font-semibold">
-                    EPA Approved
-                  </Badge>
-                </div>
               </div>
             </motion.div>
 
             {/* Product Details */}
             <motion.div 
-              className="space-y-8"
+              className="space-y-6"
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               {/* Title & Price */}
-              <div className="space-y-4">
-                <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
-                  LineTab
-                  <span className="block text-2xl lg:text-3xl font-normal text-gray-600">
+              <div className="space-y-3">
+                <div className="space-y-2">
+                  <img 
+                    src={LogoSvg} 
+                    alt="LineTab" 
+                    className="h-6 lg:h-7"
+                  />
+                  <span className="block text-lg lg:text-xl font-normal text-gray-600">
                     Dental Waterline Tablets
                   </span>
-                </h1>
+                </div>
                 
-                <div className="flex items-baseline gap-3">
-                  <span className="text-5xl font-bold text-blue-600">${pricePerBottle}</span>
-                  <span className="text-xl text-gray-500">per bottle</span>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-4xl font-bold" style={{ color: '#1C3960' }}>${pricePerBottle}</span>
+                  <span className="text-lg text-gray-500">per bottle</span>
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 flex-wrap">
                   {freeShipping ? (
-                    <Badge className="bg-green-100 text-green-800 flex items-center gap-1 px-3 py-1">
-                      <Truck className="w-4 h-4" />
+                    <Badge className="bg-green-100 text-green-800 flex items-center gap-1 px-2 py-1 text-xs">
+                      <Truck className="w-3 h-3" />
                       FREE SHIPPING
                     </Badge>
                   ) : (
-                    <Badge variant="outline" className="text-blue-600 border-blue-200">
+                    <Badge variant="outline" className="text-blue-600 border-blue-200 text-xs">
                       Free shipping over $100
                     </Badge>
                   )}
-                  <Badge variant="outline" className="text-gray-600">
+                  <Badge variant="outline" className="text-gray-600 text-xs">
                     100 tablets included
                   </Badge>
                 </div>
@@ -107,17 +107,17 @@ const ProductPage = () => {
               </div>
 
               {/* Quantity & Purchase */}
-              <Card className="border-2 border-blue-100 bg-blue-50/50">
-                <CardContent className="p-6 space-y-6">
+              <Card className="border border-blue-200 bg-blue-50/30">
+                <CardContent className="p-4 space-y-4">
                   {/* Quantity Selector */}
-                  <div className="space-y-3">
+                  <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-700">Quantity</label>
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden">
+                      <div className="flex items-center border border-gray-300 rounded-md overflow-hidden">
                         <Button 
                           variant="ghost" 
                           size="sm"
-                          className="h-12 px-4 hover:bg-gray-100"
+                          className="h-10 px-3 hover:bg-gray-100"
                           onClick={() => setQuantity(Math.max(1, quantity - 1))}
                           disabled={quantity <= 1}
                         >
@@ -128,12 +128,12 @@ const ProductPage = () => {
                           min="1"
                           value={quantity}
                           onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-                          className="w-16 h-12 text-center border-0 focus:ring-0 text-lg font-semibold"
+                          className="w-14 h-10 text-center border-0 focus:ring-0 text-base font-semibold"
                         />
                         <Button 
                           variant="ghost" 
                           size="sm"
-                          className="h-12 px-4 hover:bg-gray-100"
+                          className="h-10 px-3 hover:bg-gray-100"
                           onClick={() => setQuantity(quantity + 1)}
                         >
                           +
@@ -141,20 +141,20 @@ const ProductPage = () => {
                       </div>
                       
                       <div className="text-right">
-                        <div className="text-2xl font-bold text-gray-900">${totalPrice}</div>
-                        <div className="text-sm text-gray-500">Total</div>
+                        <div className="text-xl font-bold text-gray-900">${totalPrice}</div>
+                        <div className="text-xs text-gray-500">Total</div>
                       </div>
                     </div>
                   </div>
 
                   {/* Purchase Button */}
                   <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    whileHover={{ scale: 1.01 }}
+                    whileTap={{ scale: 0.99 }}
                   >
                     <Button 
                       size="lg" 
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white text-lg py-6 font-semibold shadow-lg"
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white text-base py-4 font-semibold shadow-md"
                       onClick={() => window.location.href = `/checkout?quantity=${quantity}`}
                     >
                       Order Now - ${totalPrice}
@@ -162,49 +162,21 @@ const ProductPage = () => {
                   </motion.div>
 
                   {!freeShipping && totalPrice < 100 && (
-                    <div className="text-center text-sm text-gray-600">
+                    <div className="text-center text-xs text-gray-600">
                       Add ${100 - totalPrice} more for free shipping
                     </div>
                   )}
                 </CardContent>
               </Card>
 
-              {/* Trust Indicators */}
-              <div className="grid grid-cols-3 gap-4">
-                <motion.div 
-                  className="flex flex-col items-center text-center p-4 bg-white rounded-xl shadow-sm border"
-                  whileHover={{ y: -2 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Shield className="w-6 h-6 text-blue-600 mb-2" />
-                  <span className="text-xs font-medium text-gray-700">EPA Approved</span>
-                </motion.div>
-                
-                <motion.div 
-                  className="flex flex-col items-center text-center p-4 bg-white rounded-xl shadow-sm border"
-                  whileHover={{ y: -2 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Star className="w-6 h-6 text-blue-600 mb-2" />
-                  <span className="text-xs font-medium text-gray-700">Professional Grade</span>
-                </motion.div>
-                
-                <motion.div 
-                  className="flex flex-col items-center text-center p-4 bg-white rounded-xl shadow-sm border"
-                  whileHover={{ y: -2 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Clock className="w-6 h-6 text-blue-600 mb-2" />
-                  <span className="text-xs font-medium text-gray-700">Long Lasting</span>
-                </motion.div>
-              </div>
+
             </motion.div>
           </div>
         </div>
       </div>
 
       {/* Value Proposition */}
-      <div className="bg-white py-16">
+      <div className="bg-white py-12">
         <div className="container mx-auto px-4">
           <motion.div 
             className="max-w-4xl mx-auto text-center"
@@ -213,33 +185,33 @@ const ProductPage = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">
               Why Dental Professionals Choose LineTab
             </h2>
             
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="space-y-3">
-                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mx-auto">
-                  <CheckCircle className="w-6 h-6 text-blue-600" />
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="space-y-2">
+                <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mx-auto">
+                  <CheckCircle className="w-5 h-5 text-blue-600" />
                 </div>
-                <h3 className="font-semibold text-gray-900">Simple & Effective</h3>
-                <p className="text-gray-600 text-sm">One tablet lasts 5-7 days. No daily maintenance required.</p>
+                <h3 className="font-semibold text-gray-900 text-sm">Simple & Effective</h3>
+                <p className="text-gray-600 text-xs">One tablet lasts 5-7 days. No daily maintenance required.</p>
               </div>
               
-              <div className="space-y-3">
-                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mx-auto">
-                  <Shield className="w-6 h-6 text-blue-600" />
+              <div className="space-y-2">
+                <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mx-auto">
+                  <Shield className="w-5 h-5 text-blue-600" />
                 </div>
-                <h3 className="font-semibold text-gray-900">Regulatory Compliant</h3>
-                <p className="text-gray-600 text-sm">EPA approved and meets all CDC waterline standards.</p>
+                <h3 className="font-semibold text-gray-900 text-sm">Regulatory Compliant</h3>
+                <p className="text-gray-600 text-xs">EPA approved and meets all CDC waterline standards.</p>
               </div>
               
-              <div className="space-y-3">
-                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mx-auto">
-                  <Star className="w-6 h-6 text-blue-600" />
+              <div className="space-y-2">
+                <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mx-auto">
+                  <Star className="w-5 h-5 text-blue-600" />
                 </div>
-                <h3 className="font-semibold text-gray-900">Cost Effective</h3>
-                <p className="text-gray-600 text-sm">100 tablets provide months of waterline protection.</p>
+                <h3 className="font-semibold text-gray-900 text-sm">Cost Effective</h3>
+                <p className="text-gray-600 text-xs">100 tablets provide months of waterline protection.</p>
               </div>
             </div>
           </motion.div>

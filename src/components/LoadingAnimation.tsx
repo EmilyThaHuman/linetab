@@ -1,5 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
-import LineTabLogo from '../assets/linetab-logo.svg';
+import LineTabLogo from '../assets/images/LineTab-logo.svg';
+import Logo from '../assets/images/Logo.svg';
+import CleanWater from '../assets/images/clean_water.svg';
 
 interface BubbleData {
   id: number;
@@ -19,7 +21,7 @@ function BubbleSystem({ animationPhase, startTime, outroStartTime }: {
 }) {
   const [bubbles, setBubbles] = useState<BubbleData[]>([]);
   const animationRef = useRef<number | undefined>(undefined);
-  const bubbleCount = 80;
+  const bubbleCount = 40;
 
   // Initialize bubbles
   useEffect(() => {
@@ -55,15 +57,15 @@ function BubbleSystem({ animationPhase, startTime, outroStartTime }: {
         // 30% chance of extra large bubbles (150-200px)
         size = Math.random() * 50 + 150;
       }
-      // Real bubble physics - smaller bubbles rise faster
-      const bubbleSpeed = (200 - size) / 80 + 0.5; // Smaller = faster, adjusted for new size range (20-200px)
+      // Real bubble physics - smaller bubbles rise faster, increased base speed
+      const bubbleSpeed = (200 - size) / 60 + 1.2; // Faster base speed to ensure all reach top
       
       const bubbleColor = bubbleColors[Math.floor(Math.random() * bubbleColors.length)];
       
       initialBubbles.push({
         id: i,
         x: Math.random() * screenWidth, // Random horizontal position
-        y: screenHeight + Math.random() * 300, // Start below screen with staggered timing
+        y: screenHeight + Math.random() * 150, // Start closer to screen bottom for faster entry
         size,
         color: bubbleColor,
         velocity: {
@@ -95,9 +97,9 @@ function BubbleSystem({ animationPhase, startTime, outroStartTime }: {
           let newX = bubble.x + bubble.velocity.x + wobble;
           let newY = bubble.y + bubble.velocity.y;
           
-          // Reset bubble when it exits the top (like real bubbles)
-          if (newY < -bubble.size - 100) {
-            newY = screenHeight + bubble.size + Math.random() * 200;
+          // During outro, don't reset bubbles - let them all exit
+          if (animationPhase !== 'outro' && newY < -bubble.size - 100) {
+            newY = screenHeight + bubble.size + Math.random() * 150;
             newX = Math.random() * screenWidth;
           }
           
@@ -105,17 +107,26 @@ function BubbleSystem({ animationPhase, startTime, outroStartTime }: {
           if (newX > screenWidth) newX = 0;
           if (newX < -bubble.size) newX = screenWidth;
           
+          // Apply accelerated upward movement during outro phase
+          if (animationPhase === 'outro') {
+            // Calculate time since outro started
+            const outroProgress = Math.min(1, (time - outroStartTime) / 3);
+            // Accelerate bubbles upward with exponential easing
+            const accelerationFactor = 1 + (outroProgress * outroProgress * 15); // Exponential acceleration
+            newY += bubble.velocity.y * accelerationFactor * 2; // Additional upward boost
+          }
+          
           // Calculate phase-based opacity
           let targetOpacity = bubble.opacity;
           
-          // Temporarily disable fade effects for debugging
-          // if (animationPhase === 'intro') {
-          //   const fadeProgress = Math.min(1, (time - startTime) / 3);
-          //   targetOpacity *= fadeProgress;
-          // } else if (animationPhase === 'outro') {
-          //   const fadeProgress = Math.max(0, 1 - (time - outroStartTime) / 3);
-          //   targetOpacity *= fadeProgress;
-          // }
+          if (animationPhase === 'intro') {
+            // Temporarily make bubbles fully visible during intro for debugging
+            targetOpacity = 1; 
+          } else if (animationPhase === 'outro') {
+            // Keep bubbles visible during accelerated exit
+            const fadeProgress = Math.max(0.3, 1 - (time - outroStartTime) / 3);
+            targetOpacity *= fadeProgress;
+          }
           
           return {
             ...bubble,
@@ -138,7 +149,7 @@ function BubbleSystem({ animationPhase, startTime, outroStartTime }: {
     };
   }, [animationPhase, startTime, outroStartTime]);
 
-  console.log('BubbleSystem render - bubbles count:', bubbles.length);
+  console.log('BubbleSystem render - bubbles count:', bubbles.length, 'Phase:', animationPhase);
   console.log('First bubble:', bubbles[0]);
   console.log('Sample bubble styles:', bubbles[0] ? {
     left: bubbles[0].x,
@@ -147,7 +158,13 @@ function BubbleSystem({ animationPhase, startTime, outroStartTime }: {
     height: bubbles[0].size,
     backgroundColor: bubbles[0].color,
     opacity: bubbles[0].opacity,
+    zIndex: 25,
   } : 'No bubbles');
+  
+  // Debug: Force some bubbles to be more visible for testing
+  if (bubbles.length > 0 && animationPhase === 'intro') {
+    console.log('Intro phase - bubble positions:', bubbles.slice(0, 3).map(b => ({ x: b.x, y: b.y, opacity: b.opacity })));
+  }
   
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-20">
@@ -203,13 +220,13 @@ export default function LoadingAnimation({ onComplete }: LoadingAnimationProps) 
       setLogoFadingOut(true);
     }, 5000);
 
-    // Complete animation after 8 seconds
+    // Complete animation after 9 seconds (extra time for bubbles to exit)
     const completeTimer = setTimeout(() => {
       console.log('Animation completing'); 
       if (onComplete) {
         onComplete();
       }
-    }, 8000);
+    }, 9000);
 
     return () => {
       clearTimeout(showLogoTimer);
@@ -249,26 +266,20 @@ export default function LoadingAnimation({ onComplete }: LoadingAnimationProps) 
         <div className="flex items-center justify-center space-x-4 mb-4">
           <img
             src={LineTabLogo}
-            alt="LineTab Logo"
-            className="h-16 w-16"
+            alt="LineTab Icon"
+            className="h-16 w-auto"
           />
-          <h1 
-            className="text-6xl font-bold text-blue-900"
-            style={{
-              letterSpacing: '0.1em',
-            }}
-          >
-            LineTab
-          </h1>
+          <img
+            src={Logo}
+            alt="LineTab Text"
+            className="h-12"
+          />
         </div>
-        <p 
-          className="text-xl mt-2 tracking-widest uppercase text-blue-900"
-          style={{ 
-            letterSpacing: '0.2em',
-          }}
-        >
-          Innovation • Technology • Solutions
-        </p>
+        <img
+          src={CleanWater}
+          alt="Clean water is not a luxury"
+          className="mt-8 h-8 w-auto mx-auto"
+        />
       </div>
     </div>
   );

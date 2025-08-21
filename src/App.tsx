@@ -10,6 +10,7 @@ import HowToUsePage from './pages/HowToUsePage';
 import BiofilmDangersPage from './pages/BiofilmDangersPage';
 import ContactPage from './pages/ContactPage';
 import BlogPostPage from './pages/BlogPostPage';
+import AboutPage from './pages/AboutPage';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -52,6 +53,7 @@ function App() {
             <Route path="/how-to-use" element={<HowToUsePage />} />
             <Route path="/biofilm-dangers" element={<BiofilmDangersPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/about" element={<AboutPage />} />
             <Route path="/blog/:slug" element={<BlogPostPage />} />
           </Routes>
         </main>
